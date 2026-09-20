@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0B1220" />
+  <meta name="description" content="اسکن فضا — اسکن سه‌بعدی محیط با دوربین گوشی اندروید، خروجی ابرنقطه رنگی PLY" />
+  <title>اسکن فضا — SpaceScan</title>
+  <link rel="icon" href="icon.svg" type="image/svg+xml" />
+  <style>
+    :root {
+      --bg: #070b14;
+      --panel: #121a2a;
+      --ink: #e8f1fa;
+      --muted: #9bb0c7;
+      --line: #1e2c44;
+      --accent: #2bb0ed;
+      --accent-2: #7cdbb8;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      background: radial-gradient(1200px 600px at 80% -10%, #14324a 0%, transparent 55%), var(--bg);
+      color: var(--ink);
+      font-family: Tahoma, "Segoe UI", sans-serif;
+    }
+    .wrap { max-width: 780px; margin: 0 auto; padding: 28px 18px 72px; }
+    .top { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; }
+    .brand img { width: 40px; height: 40px; border-radius: 10px; }
+    .lang { display: flex; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+    .lang button { border: 0; background: #0c1422; color: var(--ink); min-height: 40px; padding: 0 12px; cursor: pointer; }
+    .lang button.active { background: var(--accent); color: #041018; }
+    .hero { margin-top: 28px; }
+    h1 { margin: 14px 0 8px; font-size: 30px; line-height: 1.35; }
+    .lead { color: var(--muted); line-height: 1.95; font-size: 16px; }
+    .cloud {
+      height: 168px; border-radius: 18px; margin: 18px 0 8px;
+      background:
+        radial-gradient(circle at 20% 40%, #2bb0ed 0 3px, transparent 4px),
+        radial-gradient(circle at 35% 70%, #7cdbb8 0 2px, transparent 3px),
+        radial-gradient(circle at 62% 30%, #e8f7ff 0 2px, transparent 3px),
+        radial-gradient(circle at 78% 58%, #2bb0ed 0 3px, transparent 4px),
+        radial-gradient(circle at 48% 48%, #7cdbb8 0 2px, transparent 3px),
+        linear-gradient(180deg, #0e1828, #0b1220);
+      border: 1px solid var(--line);
+      position: relative; overflow: hidden;
+    }
+    .cloud::after {
+      content: "";
+      position: absolute; inset: 0;
+      background-image:
+        radial-gradient(#2bb0ed 1.2px, transparent 1.3px),
+        radial-gradient(#7cdbb8 1px, transparent 1.2px);
+      background-size: 28px 28px, 42px 42px;
+      background-position: 0 0, 12px 8px;
+      opacity: .35;
+      animation: drift 18s linear infinite;
+    }
+    @keyframes drift { to { background-position: 28px 28px, 54px 50px; } }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 22px 0; }
+    a.btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-height: 48px; padding: 10px 16px; border-radius: 12px;
+      text-decoration: none; font-weight: 700;
+    }
+    .primary { background: var(--accent); color: #041018; }
+    .ghost { background: #0c1422; color: var(--ink); border: 1px solid var(--line); }
+    .grid { display: grid; gap: 12px; }
+    @media (min-width: 640px) { .grid { grid-template-columns: 1fr 1fr; } }
+    .card {
+      background: var(--panel); border: 1px solid var(--line);
+      border-radius: 16px; padding: 16px; line-height: 1.9;
+    }
+    .card h2 { margin: 0 0 8px; font-size: 16px; color: var(--accent-2); }
+    ol { margin: 8px 0 0; padding-inline-start: 22px; }
+    footer { margin-top: 28px; color: var(--muted); font-size: 13px; }
+    footer a { color: var(--ink); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <div class="brand"><img src="icon.svg" alt="" /><span id="brand">اسکن فضا</span></div>
+      <div class="lang">
+        <button type="button" data-lang="fa" class="active">فا</button>
+        <button type="button" data-lang="en">EN</button>
+      </div>
+    </div>
+    <div class="hero">
+      <div class="cloud" aria-hidden="true"></div>
+      <h1 id="title">اسکن سه‌بعدی فضا با دوربین گوشی</h1>
+      <p class="lead" id="lead"></p>
+      <div class="actions">
+        <a class="btn primary" href="downloads/spacescan.apk" id="cta" download>دانلود اپ اندروید</a>
+        <a class="btn ghost" href="privacy.html" id="privacyBtn">حریم خصوصی</a>
+      </div>
+    </div>
+    <div class="grid">
+      <section class="card">
+        <h2 id="feat_title"></h2>
+        <div id="feat"></div>
+      </section>
+      <section class="card" id="install">
+        <h2 id="how_title"></h2>
+        <ol>
+          <li id="how_1"></li>
+          <li id="how_2"></li>
+          <li id="how_3"></li>
+        </ol>
+      </section>
+    </div>
+    <section class="card" style="margin-top:12px">
+      <h2 id="need_title"></h2>
+      <div id="need"></div>
+    </section>
+    <footer>
+      <a href="privacy.html" id="privacy"></a>
+      ·
+      <a href="https://github.com/megavegas/spacescan-site" id="repo">GitHub</a>
+    </footer>
+  </div>
+  <script>
+    const T = {
+      fa: {
+        title: "اسکن سه‌بعدی فضا با دوربین گوشی",
+        lead: "اسکن اتاق یک مدل ساختاری می‌سازد: کف و دیوار به‌صورت صفحه، یال‌های پرسپکتیو، و احجام پایه مثل مکعب و استوانه.",
+        cta: "دانلود اپ اندروید",
+        feat_title: "داخل اپ چیست؟",
+        feat: "ضبط RGB-D · تشخیص صفحه و خط · حجم پایه (مکعب، استوانه، دایره) · نمایش چرخشی · خروجی PLY",
+        how_title: "چطور نصب کنم؟",
+        how_1: "دکمه دانلود اپ اندروید را بزنید و فایل APK را نصب کنید. نصب از منابع ناشناس را برای مرورگر اجازه بدهید.",
+        how_2: "گوشی باید ARCore و حسگر عمق داشته باشد. اینترنت برای ساخت مدل لازم است.",
+        how_3: "اجازه دوربین، قفل ترکینگ، حرکت آرام، حداقل هشت فریم، سپس پایان و ساخت مدل.",
+        need_title: "برای اسکن خوب",
+        need: "نور کافی و سطح دارای بافت. دیوار سفید خالی، شیشه و حرکت خیلی تند نتیجه را خراب می‌کنند.",
+        privacy: "حریم خصوصی"
+      },
+      en: {
+        title: "Scan a room in 3D with your phone camera",
+        lead: "Room scan becomes a CAD-like model: planes, perspective edges, boxes, cylinders and circles — not a noisy triangle cloud.",
+        cta: "Download Android APK",
+        feat_title: "What’s inside?",
+        feat: "Live camera preview · depth points when the phone supports it · voxel filter · orbit 3D viewer · PLY export for sharing",
+        how_title: "How do I install it?",
+        how_1: "Tap Download Android APK and install the file. Allow installs from unknown sources for your browser.",
+        how_2: "You need an ARCore phone. If Play Services for AR is missing, the app will ask to install it when you start a scan.",
+        how_3: "Grant camera, wait for tracking, hit Record, move slowly, then Finish and save.",
+        need_title: "For a good scan",
+        need: "Use light and textured surfaces. Bare white walls, glass, and fast motion break the cloud. This version exports a point cloud, not a solid BIM mesh.",
+        privacy: "Privacy"
+      }
+    };
+    function apply(lang) {
+      const p = T[lang] || T.fa;
+      document.documentElement.lang = lang;
+      document.documentElement.dir = lang === "en" ? "ltr" : "rtl";
+      document.body.dir = document.documentElement.dir;
+      document.title = lang === "fa" ? "اسکن فضا — SpaceScan" : "SpaceScan — 3D room scan";
+      document.getElementById("brand").textContent = lang === "fa" ? "اسکن فضا" : "SpaceScan";
+      document.getElementById("title").textContent = p.title;
+      document.getElementById("lead").textContent = p.lead;
+      document.getElementById("cta").textContent = p.cta;
+      document.getElementById("feat_title").textContent = p.feat_title;
+      document.getElementById("feat").textContent = p.feat;
+      document.getElementById("how_title").textContent = p.how_title;
+      document.getElementById("how_1").textContent = p.how_1;
+      document.getElementById("how_2").textContent = p.how_2;
+      document.getElementById("how_3").textContent = p.how_3;
+      document.getElementById("need_title").textContent = p.need_title;
+      document.getElementById("need").textContent = p.need;
+      document.getElementById("privacy").textContent = p.privacy;
+      document.getElementById("privacyBtn").textContent = p.privacy;
+      document.querySelectorAll(".lang button").forEach((b) => b.classList.toggle("active", b.dataset.lang === lang));
+    }
+    document.querySelectorAll(".lang button").forEach((b) => b.addEventListener("click", () => apply(b.dataset.lang)));
+    apply("fa");
+  </script>
+</body>
+</html>
